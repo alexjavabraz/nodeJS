@@ -9,6 +9,7 @@ var server = http.createServer(
         var userAgent = headers['user-agent']
         var body      = [];
 
+if(request.method === 'GET' && request.url === '/q'){
         request.on('data', function(chunck){
             body.push(chunck)
         }).on('end', function(){
@@ -18,8 +19,7 @@ var server = http.createServer(
                 console.error(err);
             });
 
-            response.statusCode = 200;
-            response.setHeader('Content-Type', 'application/json');
+           
 
             // esta linha pode ser substituida por 
             // response.writeHead(200, {'Content-Type':'application/json'})
@@ -37,5 +37,7 @@ var server = http.createServer(
         }).on('error', function(err){
             console.error(err.stack);
         });
-
-}).listen(8080);//activates this server, listening on port 8080
+}
+ response.statusCode = 200;
+            response.setHeader('Content-Type', 'application/json');
+}).listen(3000);//activates this server, listening on port 8080
