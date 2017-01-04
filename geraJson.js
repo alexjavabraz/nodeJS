@@ -36,12 +36,24 @@ dispatcher.onPost("/post1", function(req, res) {
 */
 
 dispatcher.onGet("/q", function(req, res) {
-process(req, res);
+    process(req, res);
 });
 
 dispatcher.onPost("/q", function(req, res) {
-process(req, res);
+    process(req, res);
 });
+
+dispatcher.onPost("/p", function(req, res) {
+    processProducts(req, res);
+});
+
+function processProducts(req, res){
+    var resultado = {'lote':'123', 'produtos':''};
+
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    myJSONstring = JSON.stringify(resultado);
+    res.end(myJSONstring);
+}
 
 function process(req, res){
     console.log(req.params);
@@ -62,7 +74,7 @@ function process(req, res){
             console.log('Invalido')
         }else{
             resultado = {'idUsuario':'1', 'mensagem':'', 'nomeUsuario':'Alex Simas Braz'};
-             console.log('Valido')
+            console.log('Valido')
         }
 
         
