@@ -36,11 +36,42 @@ dispatcher.onPost("/post1", function(req, res) {
 */
 
 dispatcher.onGet("/q", function(req, res) {
+process(req, res);
+});
+
+dispatcher.onPost("/q", function(req, res) {
+process(req, res);
+});
+
+function process(req, res){
+    console.log(req.params);
+    console.log(req.body);
+     var resultado = {'idUsuario':'', 'mensagem':'Usuario nao encontrado'};
+
+    if(req.params != null && req.params.name != 'undefined'){
+        var usuario = req.params.email;
+        var senha   = req.params.password;
+
+        console.log(req.params.name);
+        console.log(req.params.email);
+        console.log(req.params.password);
+        console.log(req.params.mac);
+
+        if((usuario != 'alexjavabraz@gmail.com')){
+            resultado = {'idUsuario':'', 'mensagem':'Usuário ou senha inválida', 'nomeUsuario':''};
+            console.log('Invalido')
+        }else{
+            resultado = {'idUsuario':'1', 'mensagem':'', 'nomeUsuario':'Alex Simas Braz'};
+             console.log('Valido')
+        }
+
+        
+    }
+
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    var resultado = {'idUsuario':'1', 'mensagem':''};
     myJSONstring = JSON.stringify(resultado);
     res.end(myJSONstring);
-});
+}
 
 var server = http.createServer().listen(PORT);
 
